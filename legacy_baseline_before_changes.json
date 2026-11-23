@@ -1,0 +1,101 @@
+{
+ "description": "Hasil Langkah 1 (verifikasi baseline) pada data lampiran SEBELUM patch Phase 2.2; semua cocok dengan angka dasar di prompt (bagian 5).",
+ "all_match_spec": true,
+ "sha256": {
+  "official_events_classified": {
+   "scenario1": "59aca27671bd62f52be6371e8bc5fe958742839b05971cb1e66e45e41b515411",
+   "scenario2": "abd16961ad5e1a01eaa69748025b4a0934809920d522c8b059a426798a0aae9b",
+   "scenario3": "1104b8491d532ab15c906eb06e1ef9e7097f969d5174a20602e6f1cd43aca605"
+  },
+  "nt": {
+   "scenario1": "245b7110880a095f67cd9424bf03a764d8cc884b20acaed56eec8769266141ee",
+   "scenario2": "08cb0db8558cb91d8deb5e0374fe140c6f9dec0f658393a4d7f0d17b66353b9a",
+   "scenario3": "6e4ca501daae8675e6372b8f8a9fcc1cb464b6020666e64f36120eb5a3beb5af"
+  },
+  "event_rules_v2": "69b32baad3cf69c144b3f3e98d45d4ce1dc44451bed1b7582d87982a1774ff83"
+ },
+ "acceptance_checks": {
+  "phase2_1": "43/43 (dari tarball; dijalankan ulang pasca-patch 43/43)",
+  "phase3b": "21/21 (dari tarball)",
+  "phase4b": "82/82",
+  "phase5b": "34/34"
+ },
+ "sparql_rows": {
+  "scenario1": {
+   "Q01_timeline": 31878,
+   "Q01b_undated": 0,
+   "Q02_webpage_visits": 32,
+   "Q03_web_resources": 583,
+   "Q04_cookies": 20,
+   "Q05_provenance": 1,
+   "Q06_executables": 151,
+   "Q07_file_activity": 8827,
+   "Q08_registry_changes": 1056,
+   "Q09_eventlog_summary": 158,
+   "Q10_event_type_stats": 25,
+   "Q11_security_events": 50,
+   "Q15_subject_activity": 4,
+   "Q16_duplicate_groups": 7298
+  },
+  "scenario2": {
+   "Q01_timeline": 14007,
+   "Q01b_undated": 0,
+   "Q02_webpage_visits": 0,
+   "Q03_web_resources": 32,
+   "Q04_cookies": 0,
+   "Q05_provenance": 1,
+   "Q06_executables": 57,
+   "Q07_file_activity": 3593,
+   "Q08_registry_changes": 1028,
+   "Q09_eventlog_summary": 69,
+   "Q10_event_type_stats": 19,
+   "Q11_security_events": 30,
+   "Q15_subject_activity": 3,
+   "Q16_duplicate_groups": 3597
+  },
+  "scenario3": {
+   "Q01_timeline": 6003,
+   "Q01b_undated": 2,
+   "Q02_webpage_visits": 0,
+   "Q03_web_resources": 16,
+   "Q04_cookies": 3,
+   "Q05_provenance": 1,
+   "Q06_executables": 17,
+   "Q07_file_activity": 2169,
+   "Q08_registry_changes": 275,
+   "Q09_eventlog_summary": 49,
+   "Q10_event_type_stats": 17,
+   "Q11_security_events": 20,
+   "Q15_subject_activity": 2,
+   "Q16_duplicate_groups": 4011
+  }
+ },
+ "correlation": {
+  "scenario1": {
+   "candidate_pairs_unique": 160862,
+   "restating_excluded": 15314,
+   "ek_pairs": 3
+  },
+  "scenario2": {
+   "candidate_pairs_unique": 137842,
+   "restating_excluded": 5844,
+   "ek_pairs": 3
+  },
+  "scenario3": {
+   "candidate_pairs_unique": 4080,
+   "restating_excluded": 1693,
+   "ek_pairs": 0
+  }
+ },
+ "pairs_csv_sha256": {
+  "scenario1": "202ac36ddddd5ff0ad7e4c869b001cc32decc80db4de2b72380786ce0be2f86f",
+  "scenario2": "e6d51b93e95037163ff59fadd223dec41bea1241fc42e21d590895d5a99e0c4d",
+  "scenario3": "2951d5d957cdacb67302b75418bcc334a20ed96580253cf473c1d7a52aa8174f"
+ },
+ "tests": {
+  "ran": 118,
+  "skipped": 1,
+  "skip_reason": "tests.test_phase2_1 (A2) butuh timeline.csv S1 penuh yang tidak dilampirkan; satu-satunya skip, bukan karena queries/ atau rdflib"
+ },
+ "extraction_note": "events_scenario{1,2,3}.zip dan tasks.zip diekstrak ke data/scenarioN/events dan data/tasks."
+}
