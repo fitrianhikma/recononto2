@@ -1,0 +1,6 @@
+PREFIX ord2i: <https://example.org/thesis-ord2i#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+# Q09 Ringkasan log event Windows (EventLogEntry): provider, Event ID, tipe, jumlah.
+SELECT ?provider ?eid ?type (COUNT(?event) AS ?n) WHERE {
+  ?event a ord2i:EventLogEntry ; ord2i:hasProvider ?provider ; ord2i:hasEventID ?eid ; ord2i:hasEventType ?type .
+} GROUP BY ?provider ?eid ?type ORDER BY DESC(?n) ?provider ?eid

@@ -1,0 +1,7 @@
+PREFIX ord2i: <https://example.org/thesis-ord2i#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+# Q01 Timeline (RQ2). Semua Event berstempel waktu valid, urut kronologis. Tanpa LIMIT.
+SELECT ?event ?ts ?type ?parser ?file ?row WHERE {
+  ?event a ord2i:Event ; ord2i:hasTimestamp ?ts ; ord2i:hasEventType ?type ;
+         ord2i:hasParser ?parser ; ord2i:hasSourceFile ?file ; ord2i:hasRowInFile ?row .
+} ORDER BY ?ts ?file ?row

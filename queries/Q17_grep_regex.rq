@@ -1,0 +1,9 @@
+PREFIX ord2i: <https://example.org/thesis-ord2i#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+# Q17 TEMPLATE (baru V1): emulasi `grep -E` tugas S3 pada pesan ATAU display_name. Parameter ?pattern diikat dari luar.
+# Beda dengan Q13: display_name dan timestamp_desc OPSIONAL (builder tidak menulis triple dari nilai kosong, jadi Q13/Q14 melewatkan event tanpa nilai itu).
+SELECT ?event ?file ?row ?ts_raw ?tsd ?msg ?disp WHERE {
+  ?event a ord2i:Event ; ord2i:hasSourceFile ?file ; ord2i:hasRowInFile ?row ; ord2i:hasTimestampRaw ?ts_raw .
+  OPTIONAL { ?event ord2i:hasMessage ?msg } OPTIONAL { ?event ord2i:hasDisplayName ?disp } OPTIONAL { ?event ord2i:hasTimestampDescription ?tsd }
+  FILTER((BOUND(?msg) && REGEX(?msg, ?pattern)) || (BOUND(?disp) && REGEX(?disp, ?pattern)))
+}

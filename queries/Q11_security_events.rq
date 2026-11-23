@@ -1,0 +1,11 @@
+PREFIX ord2i: <https://example.org/thesis-ord2i#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+# Q11 Peristiwa keamanan/sistem beserta Subject bila ada (SID/nama akun). Untuk digest S2/S3.
+SELECT ?event ?ts ?type ?provider ?eid ?acct ?sid ?logonType WHERE {
+  ?event ord2i:hasEventType ?type .
+  FILTER(?type IN ("UserLogon","UserLogonFailed","UserLogoff","LogCleared","SystemTimeChange","SystemShutdown","FirewallChange","ProcessCreate"))
+  OPTIONAL { ?event ord2i:hasProvider ?provider ; ord2i:hasEventID ?eid }
+  OPTIONAL { ?event ord2i:hasLogonType ?logonType }
+  OPTIONAL { ?event ord2i:hasSubject ?s . OPTIONAL { ?s ord2i:hasAccountName ?acct } OPTIONAL { ?s ord2i:hasSID ?sid } }
+  OPTIONAL { ?event ord2i:hasTimestamp ?ts }
+} ORDER BY ?ts ?type

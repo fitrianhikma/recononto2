@@ -1,0 +1,4 @@
+PREFIX ord2i: <https://example.org/thesis-ord2i#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+# Q10 Statistik tipe event (validasi: jumlah == jumlah baris input).
+SELECT ?type (COUNT(?event) AS ?n) WHERE { ?event a ord2i:Event ; ord2i:hasEventType ?type } GROUP BY ?type ORDER BY DESC(?n) ?type

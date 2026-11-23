@@ -1,0 +1,7 @@
+PREFIX ord2i: <https://example.org/thesis-ord2i#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+# Q02 Halaman web yang dikunjungi (SKL Webpage via hasObject).
+SELECT ?event ?ts ?url ?host ?title WHERE {
+  ?event ord2i:hasObject ?w . ?w a ord2i:Webpage ; ord2i:hasURL ?url .
+  OPTIONAL { ?w ord2i:hasHost ?host } OPTIONAL { ?w ord2i:hasTitle ?title } OPTIONAL { ?event ord2i:hasTimestamp ?ts }
+} ORDER BY ?ts ?url

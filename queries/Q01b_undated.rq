@@ -1,0 +1,7 @@
+PREFIX ord2i: <https://example.org/thesis-ord2i#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+# Q01b Event TANPA xsd:dateTime (status timestamp bukan valid). Pelengkap Q01.
+SELECT ?status (COUNT(?event) AS ?n) WHERE {
+  ?event a ord2i:Event ; ord2i:hasTimestampStatus ?status .
+  FILTER NOT EXISTS { ?event ord2i:hasTimestamp ?t }
+} GROUP BY ?status ORDER BY DESC(?n)

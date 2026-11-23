@@ -1,0 +1,6 @@
+PREFIX ord2i: <https://example.org/thesis-ord2i#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+# Q16 Kelompok duplikat (hasRowHash sama). Transparansi untuk Phase 5; TIDAK menghapus apa pun.
+SELECT ?hash (COUNT(?event) AS ?copies) (COUNT(DISTINCT ?file) AS ?files) WHERE {
+  ?event ord2i:hasRowHash ?hash ; ord2i:hasSourceFile ?file .
+} GROUP BY ?hash HAVING (COUNT(?event) > 1) ORDER BY DESC(?copies) ?hash

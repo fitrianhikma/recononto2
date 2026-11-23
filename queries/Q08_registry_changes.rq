@@ -1,0 +1,8 @@
+PREFIX ord2i: <https://example.org/thesis-ord2i#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+# Q08 Perubahan registry: per kunci dan tipe.
+SELECT ?key ?type (COUNT(?event) AS ?n) (MIN(?ts) AS ?first) (MAX(?ts) AS ?last) WHERE {
+  ?event ord2i:hasObject ?k ; ord2i:hasEventType ?type . ?k a ord2i:RegistryKey ; ord2i:hasRegistryKey ?key .
+  FILTER(?type IN ("RegistryModify","ServiceModify","AutoRun","TaskSchedule"))
+  OPTIONAL { ?event ord2i:hasTimestamp ?ts }
+} GROUP BY ?key ?type ORDER BY DESC(?n) ?key

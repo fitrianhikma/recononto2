@@ -1,0 +1,7 @@
+PREFIX ord2i: <https://example.org/thesis-ord2i#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+# Q06 Eksekusi / keberadaan aplikasi (SKL ExeFile).
+SELECT ?event ?ts ?type ?name ?path ?parser WHERE {
+  ?event ord2i:hasObject ?x ; ord2i:hasEventType ?type ; ord2i:hasParser ?parser . ?x a ord2i:ExeFile ; ord2i:hasFileName ?name .
+  OPTIONAL { ?x ord2i:hasFilePath ?path } OPTIONAL { ?event ord2i:hasTimestamp ?ts }
+} ORDER BY ?ts ?name

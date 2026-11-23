@@ -1,0 +1,7 @@
+PREFIX ord2i: <https://example.org/thesis-ord2i#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+# Q13 TEMPLATE: pencarian pola pada pesan artefak. Parameter ?pattern (regex, dialek rdflib/Python) diikat dari luar.
+SELECT ?event ?file ?row ?ts_raw ?tsd ?msg ?disp WHERE {
+  ?event a ord2i:Event ; ord2i:hasSourceFile ?file ; ord2i:hasRowInFile ?row ; ord2i:hasTimestampRaw ?ts_raw ; ord2i:hasTimestampDescription ?tsd ; ord2i:hasMessage ?msg ; ord2i:hasDisplayName ?disp .
+  FILTER(REGEX(?msg, ?pattern))
+}
