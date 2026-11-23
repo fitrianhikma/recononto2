@@ -30,7 +30,7 @@ python3 run.py --stage 01
 | 05 | `05_sparql.py` | Q01–Q17 + analisis query kosong | – |
 | 06 | `06_retrieval_eval.py` | P/R/F1 pengambilan SPARQL vs GT (S2, S3) | – |
 | 07 | `07_correlate.py` | korelasi gaya Chabot + uji kasus | – |
-| 08 | `08_digest.py` | digest per unit (`--unit task|scenario`) | – |
+| 08 | `08_digest.py` | digest per unit (opsi `--unit`: `task` atau `scenario`) | – |
 | 09 | `09_prompts.py` | prompt P1/P2/P3 + cek kebocoran contoh | – |
 | 10 | `10_models_check.py` | cek Ollama; snapshot harga OpenRouter | ya |
 | 11 | `11_run_llm.py` | menjalankan LLM (cloud perlu `--confirm-cloud`) | ya |
