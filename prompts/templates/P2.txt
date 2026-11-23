@@ -1,0 +1,7 @@
+{RULES}
+
+EVIDENCE
+{DIGEST}
+
+CORRELATIONS (computed by the pipeline from all events; each line links two EVIDENCE items)
+{CORRELATIONS}

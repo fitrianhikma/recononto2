@@ -1,0 +1,1 @@
+Scores range from 0 to 1 and only rank how strongly two events appear related by time, shared object or shared account; a score is not a probability and not proof of cause.

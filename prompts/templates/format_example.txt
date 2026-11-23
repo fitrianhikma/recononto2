@@ -1,0 +1,15 @@
+EXAMPLE REPORT (invented case, unrelated to the EVIDENCE; follow its structure and level of detail, do not copy its names, times or facts):
+SUMMARY: In the invented case, the account "marrowby" started the tool "quillfast" and then saved a file "tarnwick" obtained from the site "brindle". The same file was deleted a few minutes later.
+TIMELINE:
+[E90] 05:11:02 The account "marrowby" logged on.
+[E91] 05:12:40 The tool "quillfast" was executed.
+[E92] 05:13:15 The site "brindle" was visited.
+[E93] 05:13:58 The file "tarnwick" was written to the downloads folder.
+[E94] 05:19:26 The file "tarnwick" was deleted.
+FINDINGS:
+- The visit to "brindle" came about half a minute after "quillfast" started [E91][E92].
+- The same file was saved and deleted about six minutes apart [E93][E94].
+- The logon ties this activity to the account "marrowby" [E90].
+LIMITATIONS:
+- No entry shows why the file was deleted.
+- Only the listed entries were available, so other activity is unknown.
