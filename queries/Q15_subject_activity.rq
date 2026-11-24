@@ -1,6 +1,6 @@
 PREFIX ord2i: <https://example.org/thesis-ord2i#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-# Q15 Aktivitas per Subject (akun): hanya event yang menyatakan akun (definisi ketat D5).
+# Q15 Aktivitas per Subject (akun): hanya event yang menyatakan akun (definisi subjek ketat, lihat docs/DECISIONS.md D4).
 SELECT ?acct ?sid ?type (COUNT(?event) AS ?n) (MIN(?ts) AS ?first) (MAX(?ts) AS ?last) WHERE {
   ?event ord2i:hasSubject ?s ; ord2i:hasEventType ?type .
   OPTIONAL { ?s ord2i:hasAccountName ?acct } OPTIONAL { ?s ord2i:hasSID ?sid } OPTIONAL { ?event ord2i:hasTimestamp ?ts }
