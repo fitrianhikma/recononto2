@@ -1,6 +1,6 @@
 PREFIX ord2i: <https://example.org/thesis-ord2i#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-# Q07 Aktivitas berkas: agregasi per berkas dan tipe operasi. Pengganti Q7 lama (LIMIT 500 = sampling). FileAccess ditambahkan: 220 baris GT S1 bertipe itu.
+# Q07 Aktivitas berkas: agregasi per berkas dan tipe operasi. Mencakup FileAccess (220 baris GT S1 bertipe itu). Tanpa LIMIT.
 SELECT ?path ?type (COUNT(?event) AS ?n) (MIN(?ts) AS ?first) (MAX(?ts) AS ?last) WHERE {
   ?event ord2i:hasObject ?f ; ord2i:hasEventType ?type . ?f a ord2i:File ; ord2i:hasFilePath ?path .
   FILTER(?type IN ("FileCreate","FileModify","FileDelete","FileRename","FileAccess"))
