@@ -1,5 +1,5 @@
 {
- "_comment": "Katalog query V1: padanan SIET (Q1-Q10 paper), jumlah baris run lama (acceptance/legacy_expected.json, phase4b) sebagai PEMBANDING, dan alasan bila query diperkirakan kosong. Query kosong yang TIDAK tercantum di expected_empty ditandai PERLU_DIPERIKSA oleh stage 05.",
+ "_comment": "Katalog query: padanan SIET (Q1-Q10 paper), jumlah baris acuan (acceptance/legacy_expected.json, phase4b) sebagai PEMBANDING, dan alasan bila query diperkirakan kosong. Query kosong yang TIDAK tercantum di expected_empty ditandai PERLU_DIPERIKSA oleh stage 05.",
  "queries": {
   "Q01_timeline": {
    "siet": "Q1 timeline kronologis",
@@ -19,8 +19,8 @@
     "scenario3": 2
    },
    "expected_empty": {
-    "scenario1": "run lama: 0 baris; konfirmasi dengan Q10 bahwa tipe event terkait memang tidak ada di potongan timeline skenario ini",
-    "scenario2": "run lama: 0 baris; konfirmasi dengan Q10 bahwa tipe event terkait memang tidak ada di potongan timeline skenario ini"
+    "scenario1": "acuan: 0 baris; konfirmasi dengan Q10 bahwa tipe event terkait memang tidak ada di potongan timeline skenario ini",
+    "scenario2": "acuan: 0 baris; konfirmasi dengan Q10 bahwa tipe event terkait memang tidak ada di potongan timeline skenario ini"
    }
   },
   "Q02_webpage_visits": {
@@ -32,8 +32,8 @@
     "scenario3": 0
    },
    "expected_empty": {
-    "scenario2": "run lama: 0 baris; konfirmasi dengan Q10 bahwa tipe event terkait memang tidak ada di potongan timeline skenario ini",
-    "scenario3": "run lama: 0 baris; konfirmasi dengan Q10 bahwa tipe event terkait memang tidak ada di potongan timeline skenario ini"
+    "scenario2": "acuan: 0 baris; konfirmasi dengan Q10 bahwa tipe event terkait memang tidak ada di potongan timeline skenario ini",
+    "scenario3": "acuan: 0 baris; konfirmasi dengan Q10 bahwa tipe event terkait memang tidak ada di potongan timeline skenario ini"
    }
   },
   "Q03_web_resources": {
@@ -54,12 +54,12 @@
     "scenario3": 3
    },
    "expected_empty": {
-    "scenario2": "run lama: 0 baris; konfirmasi dengan Q10 bahwa tipe event terkait memang tidak ada di potongan timeline skenario ini"
+    "scenario2": "acuan: 0 baris; konfirmasi dengan Q10 bahwa tipe event terkait memang tidak ada di potongan timeline skenario ini"
    }
   },
   "Q05_provenance": {
    "siet": "Q5 traceability TKL",
-   "purpose": "Q05 Traceability (TKL): provenance operasi investigasi. Pengganti Q5 lama (tanpa confidence).",
+   "purpose": "Q05 Traceability (TKL): provenance operasi investigasi.",
    "legacy_rows": {
     "scenario1": 1,
     "scenario2": 1,
@@ -77,7 +77,7 @@
   },
   "Q07_file_activity": {
    "siet": "Q7 operasi file system",
-   "purpose": "Q07 Aktivitas berkas: agregasi per berkas dan tipe operasi. Pengganti Q7 lama (LIMIT 500 = sampling). FileAccess ditambahkan: 220 baris GT S1 bertipe itu.",
+   "purpose": "Q07 Aktivitas berkas: agregasi per berkas dan tipe operasi. Mencakup FileAccess (220 baris GT S1 bertipe itu). Tanpa LIMIT.",
    "legacy_rows": {
     "scenario1": 8827,
     "scenario2": 3593,
@@ -140,7 +140,7 @@
   },
   "Q15_subject_activity": {
    "siet": "ekstensi tesis (tidak ada di SIET)",
-   "purpose": "Q15 Aktivitas per Subject (akun): hanya event yang menyatakan akun (definisi ketat D5).",
+   "purpose": "Q15 Aktivitas per Subject (akun): hanya event yang menyatakan akun (definisi subjek ketat, lihat docs/DECISIONS.md D4).",
    "legacy_rows": {
     "scenario1": 4,
     "scenario2": 3,
@@ -149,7 +149,7 @@
   },
   "Q16_duplicate_groups": {
    "siet": "ekstensi tesis (tidak ada di SIET)",
-   "purpose": "Q16 Kelompok duplikat (hasRowHash sama). Transparansi untuk Phase 5; TIDAK menghapus apa pun.",
+   "purpose": "Q16 Kelompok duplikat (hasRowHash sama). Hanya untuk transparansi; tidak menghapus apa pun.",
    "legacy_rows": {
     "scenario1": 7298,
     "scenario2": 3597,
@@ -158,7 +158,7 @@
   },
   "Q17_grep_regex": {
    "siet": "ekstensi tesis (tidak ada di SIET)",
-   "purpose": "Q17 TEMPLATE (baru V1): emulasi `grep -E` tugas S3 pada pesan ATAU display_name. Parameter ?pattern diikat dari luar.",
+   "purpose": "Q17 TEMPLATE: emulasi `grep -E` tugas S3 pada pesan ATAU display_name. Parameter ?pattern diikat dari luar.",
    "template": true,
    "used_by": "stage 06 (validitas pengambilan S2/S3)"
   }
