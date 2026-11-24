@@ -1,6 +1,6 @@
 PREFIX ord2i: <https://example.org/thesis-ord2i#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-# Q05 Traceability (TKL): provenance operasi investigasi. Pengganti Q5 lama (tanpa confidence).
+# Q05 Traceability (TKL): provenance operasi investigasi.
 SELECT ?op ?tool ?doi ?rules (COUNT(?event) AS ?events) WHERE {
   ?op a ord2i:InvestigativeOperation ; ord2i:hasTool ?tool ; ord2i:hasDatasetDOI ?doi ; ord2i:hasRuleTableSHA256 ?rules .
   ?event ord2i:partOfOperation ?op .
