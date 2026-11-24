@@ -1,0 +1,20 @@
+event_type,weight,rationale
+LogCleared,3,Penghapusan log peristiwa adalah tindakan anti-forensik/keamanan; jarang dan sangat informatif
+FirewallChange,3,Perubahan konfigurasi firewall adalah tindakan keamanan/sistem
+SystemTimeChange,3,Perubahan waktu sistem memengaruhi keandalan seluruh timeline
+UserLogonFailed,3,Percobaan masuk gagal adalah indikator keamanan
+UserLogoff,3,Batas akhir sesi pengguna
+SystemShutdown,3,Batas akhir sesi sistem
+ProcessCreate,3,Pembuatan proses adalah tindakan sistem yang menjelaskan aktivitas
+WebSearch,3,Kueri pencarian adalah niat pengguna yang tereksplisit
+FileDownload,3,Unduhan adalah masuknya berkas ke sistem
+WebpageVisit,3,Kunjungan halaman adalah tindakan pengguna langsung
+AppExecution,3,Eksekusi aplikasi adalah tindakan pengguna/sistem yang langsung
+UserLogon,3,Awal sesi pengguna
+AutoRun,2,Persistensi (autorun) mendukung penjelasan tetapi bukan tindakan langsung
+ServiceModify,2,Perubahan layanan adalah persistensi/konfigurasi sistem
+TaskSchedule,2,Tugas terjadwal adalah persistensi
+AppPresence,2,Keberadaan aplikasi (amcache/appcompat) mendukung tetapi bukan bukti eksekusi
+BookmarkOp,1,Operasi bookmark adalah jejak pendukung aktivitas peramban
+CookieAccess,1,Akses cookie adalah jejak pendukung
+WebCacheEntry,1,Entri cache web adalah jejak pendukung dan sangat berulang

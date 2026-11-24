@@ -1,0 +1,45 @@
+rule_id,parser_kind,parser_pattern,cond_kind,cond_value,event_type,rationale
+B01,regex,^sqlite/chrome_\d+_history$,ts_desc_in,Start Time|End Time,FileDownload,Plaso memberi Start/End Time pada tabel download browser; bukan kunjungan halaman
+B02,regex,^sqlite/chrome_\d+_history$,ts_desc_in+url_search,Last Visited Time,WebSearch,"kunjungan ke URL mesin pencari yang memuat parameter query (diuji pada URL yang dikunjungi, bukan referrer)"
+B03,regex,^sqlite/chrome_\d+_history$,ts_desc_in,Last Visited Time,WebpageVisit,kunjungan halaman
+B04,exact,sqlite/firefox_history,ts_desc_in,Added Time|Content Modification Time,BookmarkOp,"di data, Added/Content Modification Time hanya muncul pada record bookmark (Bookmark URL, menu, tags, toolbar, ...)"
+B05,exact,sqlite/firefox_history,ts_desc_in+url_search,Last Visited Time,WebSearch,sama dengan B02
+B06,exact,sqlite/firefox_history,ts_desc_in,Last Visited Time,WebpageVisit,kunjungan halaman
+B07,regex,^sqlite/(chrome|firefox)_\d+_cookies$,none,,CookieAccess,record cookie (timestamp_desc tetap menyimpan Creation/Last Access/Expiration)
+B08,exact,chrome_cache,none,,WebCacheEntry,entri cache = resource pernah diambil browser; BUKAN unduhan (rule lama: FileDownload)
+B09,exact,esedb/msie_webcache,none,,WebCacheEntry,record WebCache IE/Edge; sama dengan B08
+E01,exact,prefetch,none,,AppExecution,prefetch = bukti eksekusi
+E02,exact,winreg/bam,none,,AppExecution,BAM mencatat waktu eksekusi terakhir
+E03,exact,winreg/userassist,none,,AppExecution,UserAssist mencatat eksekusi program via shell
+E04,exact,winpca_dic,none,,AppExecution,log PCA: 'was executed'
+E05,exact,winreg/amcache,none,,AppPresence,Amcache = program tercatat di sistem; eksekusi/instalasi tidak dinyatakan (rule lama: AppInstall)
+E06,exact,winreg/appcompatcache,none,,AppPresence,ShimCache = keberadaan/akses file; eksekusi tidak pasti (rule lama: AppExecution)
+E07,exact,winreg/windows_run,none,,AutoRun,kunci Run/RunOnce (di data bernama windows_run; rule lama mencari 'winreg/run' yang tidak ada)
+E08,exact,winreg/windows_boot_execute,none,,AutoRun,BootExecute dijalankan saat boot
+E09,exact,winreg/windows_services,none,,ServiceModify,kunci konfigurasi service/driver
+E10,exact,winreg/windows_task_cache,none,,TaskSchedule,TaskCache = task terjadwal
+W01,exact,winevtx,evtx_pair,Microsoft-Windows-Security-Auditing:4624,UserLogon,ID 4624 = logon sukses (terdokumentasi Microsoft); menggantikan pencocokan substring 'logon'
+W02,exact,winevtx,evtx_pair,"Microsoft-Windows-Security-Auditing:4634,4647",UserLogoff,ID 4634/4647 = logoff
+W03,exact,winevtx,evtx_pair,Microsoft-Windows-Security-Auditing:4688,ProcessCreate,ID 4688 = proses dibuat
+W05,exact,winevtx,evtx_pair,Microsoft-Windows-Security-Auditing:4625,UserLogonFailed,kunci resmi dataset 'Windows failed login'
+W06,exact,winevtx,evtx_pair,Microsoft-Windows-Eventlog:104,LogCleared,kunci resmi dataset 'Windows event logs cleared'
+W07,exact,winevtx,evtx_pair,Microsoft-Windows-Windows Firewall With Advanced Security:2082,FirewallChange,kunci resmi dataset 'Disabling Windows Firewall recorded in Windows event logs'
+W08,exact,winevtx,evtx_pair,Microsoft-Windows-Security-Auditing:4616,SystemTimeChange,tugas grep resmi S3 (4616-with/without-regex)
+W09,exact,winevtx,evtx_pair,Microsoft-Windows-Shell-Core:9707,ProcessCreate,ground truth resmi S1 bertipe 'Process Creation'
+W10,exact,winevtx,evtx_pair,User32:1074,SystemShutdown,ground truth resmi S1 bertipe 'Shutdown time'
+W04,exact,winevtx,none,,SystemEvent,event log lain: tidak diklaim lebih spesifik
+S01,exact,text/setupapi,none,,SystemEvent,log setup/driver
+F01,exact,usnjrnl,usn_any,FILE_DELETE,FileDelete,flag USN eksplisit
+F02,exact,usnjrnl,usn_any,RENAME_NEW_NAME|RENAME_OLD_NAME,FileRename,flag USN eksplisit (tipe baru; rule lama tidak punya)
+F03,exact,usnjrnl,usn_any,FILE_CREATE,FileCreate,flag USN eksplisit (rule lama juga memakai DATA_EXTEND dan '$i30' sebagai 'create')
+F04,exact,usnjrnl,usn_any,DATA_EXTEND|DATA_OVERWRITE|DATA_TRUNCATION|NAMED_DATA_EXTEND|STREAM_CHANGE,FileModify,perubahan isi
+F05,exact,usnjrnl,usn_any,BASIC_INFO_CHANGE|SECURITY_CHANGE|EA_CHANGE|COMPRESSION_CHANGE|OBJECT_ID_CHANGE|REPARSE_POINT_CHANGE|HARD_LINK_CHANGE|INDEXABLE_CHANGE|TRANSACTED_CHANGE,FileMetadataChange,"perubahan atribut/ACL, bukan isi. Record hanya-CLOSE tidak cocok -> Unclassified (rule lama: FileDelete)"
+T01,exact,filestat,ts_desc_in,Creation Time,FileCreate,timestamp NTFS $SI: created
+T02,exact,filestat,ts_desc_in,Content Modification Time,FileModify,timestamp NTFS: mtime
+T03,exact,filestat,ts_desc_in,Last Access Time,FileAccess,timestamp NTFS: atime
+T04,exact,filestat,ts_desc_in,Metadata Modification Time,FileMetadataChange,timestamp NTFS: ctime/MFT change
+L01,suffix,/shell_items,none,,FileAccess,shell item = referensi ke file/folder dalam daftar recent/MRU/jumplist; harus sebelum R01
+L02,regex,^(custom_destinations/|olecf/olecf_automatic_destinations/)?lnk$,none,,FileAccess,LNK/jumplist ada karena target dibuka (rule lama: AppLaunch bila nama berisi .exe)
+M01,exact,pe,none,,FileMetadata,metadata header PE; di S3 36% baris tanpa label
+M02,regex,^olecf/olecf_(default|summary|document_summary)$,none,,FileMetadata,metadata OLE; olecf_automatic_destinations/lnk tetap lewat L02
+R01,prefix,winreg/,none,,RegistryModify,semua parser registry lain; timestamp = last-write key
